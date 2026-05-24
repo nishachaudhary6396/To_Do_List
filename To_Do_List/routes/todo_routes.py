@@ -1,5 +1,6 @@
 from fastapi import APIRouter, HTTPException
-from schemas import TaskCreate, TaskUpdate
+from schemas import TaskCreate, TaskUpdate, UserLogin
+from auth import create_access_token
 from crud import (
     create_task,
     get_tasks,
@@ -68,3 +69,16 @@ def remove_task(task_id: int):
         )
 
     return deleted_task
+
+#login
+@router.post("/login")
+def login(user: UserLogin):
+
+    token = create_access_token(
+        {"sub": user.username}
+    )
+
+    return {
+        "access_token": token,
+        "token_type": "bearer"
+    }

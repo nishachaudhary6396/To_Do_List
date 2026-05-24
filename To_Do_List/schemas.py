@@ -26,3 +26,9 @@ class TaskUpdate(BaseModel):
     title: Optional[str] = None
     description: Optional[str] = None
     status: Optional[str] = None
+
+
+# for login
+class UserLogin(BaseModel):
+    username: str
+    password: str
